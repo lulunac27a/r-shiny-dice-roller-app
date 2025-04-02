@@ -2,7 +2,7 @@
 library(shiny)
 # define UI component
 ui <- fluidPage(titlePanel("Dice Roller App"), sidebarLayout(sidebarPanel(numericInput("dice",
-  "Number of Dice", value = 1, min = 1)  #number of dice input
+  "Number of Dice", value = 1, min = 1, step = 1)  #number of dice input
 ,
   actionButton("roll", "Roll Dice")  #button to roll dice
 ),
