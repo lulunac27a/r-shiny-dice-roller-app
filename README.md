@@ -1,4 +1,4 @@
-# Dice ROlling App in R Shiny
+# Dice Rolling App in R Shiny
 
 This is a dice rolling app built in R Shiny. 
 
