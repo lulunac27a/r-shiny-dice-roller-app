@@ -19,7 +19,7 @@ server <- function(input, output) {
     output$diceRollSum <- renderText(paste("Total Dice: ",
       sum(diceRolls)))
     # set output to values of dice rolls
-    output$diceRollValues <- renderText(paste("Dice Rolls by Number: ",
+    output$diceRollValues <- renderText(paste("Dice Rolls by Number: \n",
       paste(names(table(diceRolls)), table(diceRolls),
         sep = ": ", collapse = "\n")))
   })
