@@ -10,18 +10,25 @@ ui <- fluidPage(titlePanel("Dice Roller App"), sidebarLayout(sidebarPanel(numeri
     "Roll Dice")  #button to roll dice
 ), mainPanel(textOutput("diceRollSum")  #dice roll sum text output
 , textOutput("diceRollValues")  #dice roll values text output
+, textOutput("sortedDiceRollValues")  #sorted dice roll values text output
 )))
 server <- function(input, output) {
   # when roll dice button is pressed
   observeEvent(input$roll, {
     # roll dice
-    diceRolls = sample(1:input$sides, input$dice, replace = TRUE)
+    diceRolls <- sample(1:input$sides, input$dice, replace = TRUE)
+    # sort dice rolls
+    sortedDiceRolls <- diceRolls[order(diceRolls, decreasing = TRUE)]
     # set output to sum of dice rolls
     output$diceRollSum <- renderText(paste("Total Dice: ",
       sum(diceRolls)))
     # set output to values of dice rolls
     output$diceRollValues <- renderText(paste("Dice Rolls by Number: \n",
       paste(names(table(diceRolls)), table(diceRolls),
+        sep = ": ", collapse = "\n")))
+    # set output to sorted values of dice rolls
+    output$sortedDiceRollValues <- renderText(paste("Sorted Dice Rolls by Number: \n",
+      paste(names(table(sortedDiceRolls)), table(sortedDiceRolls),
         sep = ": ", collapse = "\n")))
   })
 }
