@@ -9,6 +9,8 @@ ui <- fluidPage(titlePanel("Dice Roller App"), sidebarLayout(sidebarPanel(numeri
 , checkboxInput("rollList",
     "Show List of Dice Rolls", value = FALSE)  #checkbox to show list of dice rolls
 ,
+  checkboxInput("plot", "Plot Dice Rolls")  #checkbox to plot list of dice rolls
+,
   actionButton("roll", "Roll Dice")  #button to roll dice
 ),
   mainPanel(textOutput("diceRollSum")  #dice roll sum text output
@@ -18,6 +20,8 @@ ui <- fluidPage(titlePanel("Dice Roller App"), sidebarLayout(sidebarPanel(numeri
     textOutput("sortedDiceRollValues")  #sorted dice roll values text output
 ,
     textOutput("diceRollList")  #dice roll list text output
+,
+    plotOutput("diceRollPlot")  #dice roll plot output
 )))
 server <- function(input, output) {
   # when roll dice button is pressed
@@ -48,6 +52,16 @@ server <- function(input, output) {
         paste(diceRolls, collapse = ", ")))
     } else {
       output$diceRollList <- renderText("")
+    }
+    # show plot of dice rolls if checkbox is checked
+    if (input$plot) {
+      output$diceRollPlot <- renderPlot({
+        barplot(diceRollsTable)  #plot list of dice rolls
+      })
+    } else {
+      output$diceRollPlot <- renderPlot({
+        plot.new()  #render empty and blank plot
+      })
     }
   })
 }
