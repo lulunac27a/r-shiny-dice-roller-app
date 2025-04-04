@@ -56,7 +56,8 @@ server <- function(input, output) {
     # show plot of dice rolls if checkbox is checked
     if (input$plot) {
       output$diceRollPlot <- renderPlot({
-        barplot(diceRollsTable)  #plot list of dice rolls
+        barplot(diceRollsTable, main = "Dice Rolls",
+          xlab = "Dice", ylab = "Frequency", col = "blue")  #plot list of dice rolls
       })
     } else {
       output$diceRollPlot <- renderPlot({
